@@ -43,4 +43,4 @@ app.*.map.json
 /android/app/release
 
 # KEYS for FB
-firebase_options.dart
+# firebase_options.dart
