@@ -16,7 +16,7 @@ main() async {
   // See the named arguments of SmtpServer for further configuration
   // options.  
   // Read HTML content from file
-  final file = File('emails/blackmail_1.html');
+  final file = File('emails/social_engineering_1.html');
   final htmlContent = await file.readAsString();
 
   // Create our message.
