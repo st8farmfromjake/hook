@@ -7,8 +7,8 @@ main() async {
   // you have two-factor authentication enabled and created an App password.
   // Search for "gmail app password 2fa"
   // The alternative is to use oauth.
-  String username = 'michael@novusomni.com';
-  String password = 'uobopytngbjpvjwk';
+  String username = 'novusomni@gmail.com';
+  String password = 'qulobpzqizfroblh';
 
   final smtpServer = gmail(username, password);
   // Use the SmtpServer class to configure an SMTP server:
