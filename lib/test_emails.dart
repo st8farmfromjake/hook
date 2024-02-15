@@ -1,8 +1,42 @@
-import 'dart:io'; // Import the File class
+import 'dart:developer';
+
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
-main() async {
+Future<String> loadHtmlContent(String email) async {
+  String htmlContent = await rootBundle.loadString(email);
+  
+  // Now you have the HTML content in the 'htmlContent' variable
+  return htmlContent;
+}
+
+sendEmail({int? emailNum, String? emailAdd = 'wolly0305@icloud.com', String? name = 'Mufasa', String? fromName = 'Your mom', String? companyName = 'Hook'}) async {
+  String html;
+  switch (emailNum) {
+  case 0: html = '''
+  <p>Hello $name</p>
+  <p>We are demanding that you give us all of your company's information, because if you don’t then we will leak some very sensitive information about you and your bosses. Please go to <a href="https://novusomni.com/hook/">this website</a> and follow ALL instructions carefully and promptly. If we don’t get this information within 24 hours everything will be leaked.</p>
+  <p>Best Wishes,</p>
+  <p>$fromName</p>
+  '''; break;
+  case 1:html = '''
+  <p>$name</p>
+  <p>I have recently obtained sensitive information that could potentially damage your reputation and career. This information is of a confidential nature and was not intended to be shared with anyone outside of its original circle. I am giving you the opportunity to prevent this information from being made public by adhering to my demands.</p>
+  <p>Complete silence and immediate action are expected. Any attempt to contact me or negotiate the terms of this agreement will be met with the swift dissemination of the aforementioned information. I will be monitoring your actions closely to ensure compliance. Failure to meet my demands will result in the release of this information to the public and relevant authorities.</p>
+  <p>I will provide you with further instructions on how to proceed. In the meantime, I advise you to follow up through the following <a href="https://novusomni.com/hook/">link</a>. This is your only warning.</p>
+  <p>Your response will be checked within the next 24 hours. If I do not receive a satisfactory reply, the countdown to public exposure will begin. Do not underestimate the severity of the situation. Act now to protect your interests.</p>
+  '''; break;
+  // additional cases as needed
+  default: html = '''
+  <p>Good afternoon $name,</p>
+  <p>We at $companyName want to hear from you, our employees! <a href="https://novusomni.com/hook/">Click here</a> to fill out a 5 minute survey about your quality of life here.</p>
+  <p>Thank you,</p>
+  <p>HR team</p>
+  ''';
+    // code block to execute if expression does not match any case
+}
+
   // Note that using a username and password for gmail only works if
   // you have two-factor authentication enabled and created an App password.
   // Search for "gmail app password 2fa"
@@ -16,26 +50,25 @@ main() async {
   // See the named arguments of SmtpServer for further configuration
   // options.  
   // Read HTML content from file
-  final file = File('emails/social_engineering_1.html');
-  final htmlContent = await file.readAsString();
+  // final String htmlContent = await loadHtmlContent('assets/emails/blackmail_1.html');
 
   // Create our message.
   final message = Message()
     ..from = Address(username, 'Your Boss')
-    ..recipients.add('michaelwoll93@gmail.com')
+    ..recipients.add(emailAdd)
     // ..ccRecipients.addAll(['destCc1@example.com', 'destCc2@example.com'])
     // ..bccRecipients.add(Address('bccAddress@example.com'))
     ..subject = 'Watch Out!!'
     // ..text = 'This is the plain text.\nThis is line 2 of the text part.'
-    ..html = htmlContent;
+    ..html = html;
 
   try {
     final sendReport = await send(message, smtpServer);
-    print('Message sent: ' + sendReport.toString());
+    log('Message sent: ${sendReport.toString()}');
   } on MailerException catch (e) {
-    print('Message not sent.');
+    log('Message not sent.');
     for (var p in e.problems) {
-      print('Problem: ${p.code}: ${p.msg}');
+      log('Problem: ${p.code}: ${p.msg}');
     }
   }
   // DONE
