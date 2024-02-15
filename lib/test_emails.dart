@@ -65,6 +65,7 @@ sendEmail({int? emailNum, String? emailAdd = 'wolly0305@icloud.com', String? nam
   try {
     final sendReport = await send(message, smtpServer);
     log('Message sent: ${sendReport.toString()}');
+    print('Message sent: $sendReport');
   } on MailerException catch (e) {
     log('Message not sent.');
     for (var p in e.problems) {
