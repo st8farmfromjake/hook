@@ -1,9 +1,44 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hook/components/my_textfield.dart';
 import 'package:hook/palette.dart';
 import '../widgets/widgets.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  final Function()? onTap;
+  const RegisterPage({super.key, required this.onTap});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  //Email & Password controllers
+  final emailController = TextEditingController();
+
+  final passwordController = TextEditingController();
+
+  //Sign in method
+  void signUserUp() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+      Navigator.pop(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +66,38 @@ class LoginPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: Column(
                     children: [
-                      const Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          TextInput(
-                            hint: 'Email',
-                            inputType: TextInputType.emailAddress,
-                            inputAction: TextInputAction.next,
+                          const Center(
+                            child: Text(
+                              "Register your Account!",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 32,
+                              ),
+                            ),
                           ),
-                          PasswordInput(
-                            hint: 'Password',
-                            inputAction: TextInputAction.done,
+
+                          const SizedBox(height: 25),
+                          //username textfeild
+                          MyTextField(
+                            controller: emailController,
+                            hintText: 'Email',
+                            obscureText: false,
+                          ),
+
+                          const SizedBox(height: 10),
+
+                          //password text feild
+                          MyTextField(
+                            controller: passwordController,
+                            hintText: 'Password',
+                            obscureText: true,
+                          ),
+
+                          const SizedBox(
+                            height: 10,
                           ),
                         ],
                       ),
@@ -54,15 +110,36 @@ class LoginPage extends StatelessWidget {
                                 color: Colors.orange,
                                 borderRadius: BorderRadius.circular(16)),
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: signUserUp,
                                 child: const Padding(
                                   padding: EdgeInsets.symmetric(vertical: 20.0),
                                   child: Text(
-                                    'Login',
+                                    'Sign In',
                                     style: kBodyText,
                                   ),
                                 )),
                           )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Already a member?',
+                            style: TextStyle(color: Colors.grey[700]),
+                          ),
+                          const SizedBox(
+                            width: 4,
+                          ),
+                          GestureDetector(
+                            onTap: widget.onTap,
+                            child: const Text(
+                              'Log in Now',
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
                         ],
                       )
                     ],
