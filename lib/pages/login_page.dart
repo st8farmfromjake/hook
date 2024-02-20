@@ -65,104 +65,106 @@ class _LoginPageState extends State<LoginPage> {
         Scaffold(
             backgroundColor: Colors.transparent,
             body: SafeArea(
-                child: Column(
-              children: [
-                Container(
-                  height: 150,
-                  child: const Center(
-                    child: Text(
-                      'Hook',
-                      style: kHeading,
+                child: SingleChildScrollView(
+                  child: Column(
+                                children: [
+                  Container(
+                    height: 150,
+                    child: const Center(
+                      child: Text(
+                        'Hook',
+                        style: kHeading,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 100,
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: Column(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          const Center(
-                            child: Text(
-                              "Login!",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 32,
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    child: Column(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            const Center(
+                              child: Text(
+                                "Login!",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 32,
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 25),
-                          //username textfeild
-                          MyTextField(
-                            controller: emailController,
-                            hintText: 'Email',
-                            obscureText: false,
-                          ),
-
-                          const SizedBox(height: 10),
-
-                          //password text feild
-                          MyTextField(
-                            controller: passwordController,
-                            hintText: 'Password',
-                            obscureText: true,
-                          ),
-
-                          const SizedBox(
-                            height: 10,
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          const SizedBox(height: 100),
-                          Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: Colors.orange,
-                                borderRadius: BorderRadius.circular(16)),
-                            child: TextButton(
-                                onPressed: signUserIn,
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 20.0),
-                                  child: Text(
-                                    'Sign In',
-                                    style: kBodyText,
-                                  ),
-                                )),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Not a member?',
-                            style: TextStyle(color: Colors.grey[700]),
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          GestureDetector(
-                            onTap: widget.onTap,
-                            child: const Text(
-                              'Register Now',
-                              style: TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold),
+                            const SizedBox(height: 25),
+                            //username textfeild
+                            MyTextField(
+                              controller: emailController,
+                              hintText: 'Email',
+                              obscureText: false,
                             ),
-                          ),
-                        ],
-                      )
-                    ],
+                  
+                            const SizedBox(height: 10),
+                  
+                            //password text feild
+                            MyTextField(
+                              controller: passwordController,
+                              hintText: 'Password',
+                              obscureText: true,
+                            ),
+                  
+                            const SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            const SizedBox(height: 100),
+                            Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  color: Colors.orange,
+                                  borderRadius: BorderRadius.circular(16)),
+                              child: TextButton(
+                                  onPressed: signUserIn,
+                                  child: const Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 20.0),
+                                    child: Text(
+                                      'Sign In',
+                                      style: kBodyText,
+                                    ),
+                                  )),
+                            )
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Not a member?',
+                              style: TextStyle(color: Colors.grey[700]),
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            GestureDetector(
+                              onTap: widget.onTap,
+                              child: const Text(
+                                'Register Now',
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ))),
+                                ],
+                              ),
+                ))),
       ],
     );
   }
