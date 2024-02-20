@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "590743930409",
+    "project_id": "hook-9f781",
+    "storage_bucket": "hook-9f781.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590743930409:android:db9032168cd0b4a49bbe38",
+        "android_client_info": {
+          "package_name": "com.example.hook"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAF6ofwiDKfz2gui_MNokkLUHGQNoDxFGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
