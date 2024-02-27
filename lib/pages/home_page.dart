@@ -1,7 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../test_emails.dart';
+import '../pages/email_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -45,14 +45,6 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
       home: Scaffold(
         //WILL REMOVE THE APP BAR ONCE ACCOUNT INFO PAGE IS DONE
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: signUserOut,
-              icon: const Icon(Icons.logout),
-            )
-          ],
-        ),
         //^^WILL REMOVE WHEN ACCOUNT INFO PAGE IS DONE
         body: SizedBox.expand(
           child: PageView(
@@ -70,11 +62,15 @@ class _HomePageState extends State<HomePage> {
               Container(
                 color: Colors.red,
               ),
-              Container(
-                color: Colors.green,
-              ),
+              const EmailPage(),
               Container(
                 color: Colors.purple,
+                child: IconButton(
+                  onPressed: signUserOut,
+                  icon: const Icon(Icons.logout),
+                  color: Colors.white,
+                  iconSize: 60,
+                ),
               ),
               Container(
                 color: Colors.black,

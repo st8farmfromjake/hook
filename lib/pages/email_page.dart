@@ -74,8 +74,11 @@ class _EmailPageState extends State<EmailPage> {
                 child: SingleChildScrollView(
                   child: Column(
                                 children: [
+                  const SizedBox(
+                    height: 15,
+                  ),
                   Container(
-                    height: 120,
+                    height: 75,
                     child: const Center(
                       child: Text(
                         'Hook',
@@ -84,7 +87,7 @@ class _EmailPageState extends State<EmailPage> {
                     ),
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 15,
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 40),
