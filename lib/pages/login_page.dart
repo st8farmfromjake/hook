@@ -18,6 +18,8 @@ class _LoginPageState extends State<LoginPage> {
 
   final passwordController = TextEditingController();
 
+  bool showError = false;
+
   //Sign in method
   void signUserIn() async {
     showDialog(
@@ -102,6 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                               controller: emailController,
                               hintText: 'Email',
                               obscureText: false,
+                              isError: showError && emailController.text.isEmpty,
                             ),
                   
                             const SizedBox(height: 10),
@@ -111,6 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                               controller: passwordController,
                               hintText: 'Password',
                               obscureText: true,
+                              isError: showError && passwordController.text.isEmpty,
                             ),
                   
                             const SizedBox(
