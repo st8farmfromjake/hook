@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               // Log a message to the debugger when the button is pressed
-              sendEmail();
+              // sendEmail();
               debugPrint('Button pressed!');
             },
             style: ElevatedButton.styleFrom(
