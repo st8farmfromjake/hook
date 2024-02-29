@@ -17,3 +17,9 @@ const TextStyle kBodyFish = TextStyle(
   fontStyle: FontStyle.italic,
   color: Colors.white,
 );
+
+const TextStyle kSubHeading = TextStyle(
+  fontSize: 30,
+  fontWeight: FontWeight.bold,
+  color: Colors.white,
+);

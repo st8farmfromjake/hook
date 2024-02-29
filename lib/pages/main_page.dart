@@ -35,24 +35,60 @@ class MainPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Row(
+                Stack(
                   children: [
                     Container(
                       height: 150,
                       width: 160,
-                      margin: const EdgeInsets.only(top:50,right:30,left:30),
+                      margin: const EdgeInsets.only(top:50,right:20,left:200),
                       decoration: BoxDecoration(
                         color: Colors.grey.withOpacity(0.5)
+                      ),
+                      child   : const Text(
+                        'Email\nSender',
+                        style: kBodyText,
+                        textAlign: TextAlign.center,
                       )
                     ),
                     Container(
                       height: 150,
                       width: 160,
-                      margin: const EdgeInsets.only(top:50,right:20),
+                      margin: const EdgeInsets.only(top:50,right:100, left:10),
                       decoration: BoxDecoration(
                         color: Colors.grey.withOpacity(0.5),
+                      ),
+                      child   : const Text(
+                        'Analytics\nBoard',
+                        style: kBodyText,
+                        textAlign: TextAlign.center,
                       )
                     ),
+                    Container(
+                      width: 130,
+                      height: 40,
+                      margin: const EdgeInsets.only(top:145,right:100, left:25),
+                      decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(16)),
+                      child   : const Text(
+                        'Go There',
+                        style: kBodyText,
+                        textAlign: TextAlign.center,
+                      )
+                    ),
+                    Container(
+                      width: 130,
+                      height: 40,
+                      margin: const EdgeInsets.only(top:145,right:30, left:215),
+                      decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(16)),
+                      child   : const Text(
+                        'Go There',
+                        style: kBodyText,
+                        textAlign: TextAlign.center,
+                      )
+                    )
                   ]
                 ),
                 Row(
@@ -64,14 +100,19 @@ class MainPage extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Colors.grey.withOpacity(0.5),
                       ),
-                      
+                      child   : const Text(
+                        'Mission Statement\n\nTo increase phishing email scam awareness within companies',
+                        style: kSubHeading,
+                        textAlign: TextAlign.center,
+                      )
                     ),
                   ]
                 )
               ]
             ) 
           ),
-          )
+        ),
+
       ]
     );
   }
