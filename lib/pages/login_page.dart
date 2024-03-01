@@ -20,28 +20,32 @@ class _LoginPageState extends State<LoginPage> {
 
   bool showError = false;
 
-  //Sign in method
   void signUserIn() async {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
+  // Show the loading dialog
+  showDialog(
+    context: context,
+    barrierDismissible: false, // Prevents the dialog from being dismissed accidentally
+    builder: (context) => const Center(child: CircularProgressIndicator()),
+  );
 
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-      Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
-      Navigator.pop(context);
-
-      showErrorMessage(e.code);
+  try {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+    // Check if the widget is still mounted before popping the dialog
+    if (mounted) {
+      Navigator.pop(context); // Dismiss the loading dialog
+    }
+  } on FirebaseAuthException catch (e) {
+    // Check if the widget is still mounted before popping the dialog and showing the error message
+    if (mounted) {
+      Navigator.pop(context); // Dismiss the loading dialog
+      showErrorMessage(e.code); // Show the error message
     }
   }
+}
+
 
   void showErrorMessage(String message) {
     showDialog(

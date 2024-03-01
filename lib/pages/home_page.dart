@@ -1,7 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hook/palette.dart';
 import 'package:flutter/material.dart';
 import '../pages/email_page.dart';
+import '../widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -46,7 +48,10 @@ class _HomePageState extends State<HomePage> {
       home: Scaffold(
         //WILL REMOVE THE APP BAR ONCE ACCOUNT INFO PAGE IS DONE
         //^^WILL REMOVE WHEN ACCOUNT INFO PAGE IS DONE
-        body: SizedBox.expand(
+        body: Stack(
+          children: [
+            const BackgroundImage(),
+            SizedBox.expand(
           child: PageView(
             controller: controller,
             onPageChanged: (index) {
@@ -57,26 +62,87 @@ class _HomePageState extends State<HomePage> {
             children: [
               //replace with pages
               Container(
-                color: Colors.blue,
-              ),
-              Container(
-                color: Colors.red,
-              ),
-              const EmailPage(),
-              Container(
-                color: Colors.purple,
-                child: IconButton(
-                  onPressed: signUserOut,
-                  icon: const Icon(Icons.logout),
-                  color: Colors.white,
-                  iconSize: 60,
+                child: const Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min, // To keep the column's size just as big as its children need.
+                    children: [
+                      Text(
+                        '<º)))><\nHook',
+                        style: kHeading,
+                        textAlign: TextAlign.center, // Center align the text if kHeading doesn't already do so.
+                      ),
+                      SizedBox(height: 16), // Space between the two texts. Adjust the size as needed.
+                      Text(
+                        "Test your employees. Improve your scam-awareness. Bolster your security.",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                        textAlign: TextAlign.center, // Ensures text alignment is centered.
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Container(
-                color: Colors.black,
+                padding: const EdgeInsets.all(30),
+                child: const Column(
+                  mainAxisSize: MainAxisSize.min, // To keep the column as compact as possible.
+                  children: [
+                    Text(
+                        'Reports',
+                        style: kHeading,
+                        textAlign: TextAlign.center, // Center align the text if kHeading doesn't already do so.
+                      ),
+                    // Add other widgets below as needed.
+                  ],
+                ),
               ),
+
+              const EmailPage(),
+
+              Container(
+                padding: const EdgeInsets.all(30),
+                child: const Column(
+                  mainAxisSize: MainAxisSize.min, // To keep the column as compact as possible.
+                  children: [
+                    Text(
+                        'Profile',
+                        style: kHeading,
+                        textAlign: TextAlign.center, // Center align the text if kHeading doesn't already do so.
+                      ),
+                    // Add other widgets below as needed.
+                  ],
+                ),
+              ),
+
+              Container(
+                padding: const EdgeInsets.all(30),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min, // Keeps the column compact.
+                  children: [
+                    const Text(
+                      'Settings',
+                      style: kHeading,
+                      textAlign: TextAlign.center, // Centers the text.
+                    ),
+                    IconButton(
+                      onPressed: signUserOut,
+                      icon: const Icon(Icons.logout),
+                      color: Colors.white,
+                      iconSize: 60,
+                    ),
+                    const SizedBox(height: 20), // Adds spacing between the icon button and the text.
+                    
+                    // You can add more widgets here as needed.
+                  ],
+                ),
+              ),
+
             ],
           ),
+        ),
+      ],
         ),
         bottomNavigationBar: CurvedNavigationBar(
           index: _page,
