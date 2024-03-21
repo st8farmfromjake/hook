@@ -1,3 +1,7 @@
 {
+<<<<<<< HEAD
     "java.configuration.updateBuildConfiguration": "interactive"
+=======
+    "cmake.sourceDirectory": "/Users/michaelwoll/code/hook/linux"
+>>>>>>> 641d5b88a1464574fdbe6bf5c85387c85a0292dc
 }
