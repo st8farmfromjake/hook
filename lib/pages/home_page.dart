@@ -169,21 +169,26 @@ class _HomePageState extends State<HomePage> {
                       mainAxisSize:
                           MainAxisSize.min, // Keeps the column compact.
                       children: [
+                        const SizedBox(
+                            height:
+                                200),
                         const Text(
-                          'Settings',
+                          'Are you sure you want to sign out?',
                           style: kHeading,
                           textAlign: TextAlign.center, // Centers the text.
+                        ),
+                        const SizedBox(
+                          height: 20,
                         ),
                         IconButton(
                           onPressed: signUserOut,
                           icon: const Icon(Icons.logout),
                           color: Colors.white,
-                          iconSize: 60,
+                          iconSize: 100,
                         ),
                         const SizedBox(
                             height:
                                 20), // Adds spacing between the icon button and the text.
-
                         // You can add more widgets here as needed.
                       ],
                     ),
@@ -221,7 +226,7 @@ class _HomePageState extends State<HomePage> {
               color: Colors.white,
             ),
             Icon(
-              Icons.settings,
+              Icons.logout,
               size: 26,
               color: Colors.white,
             ),

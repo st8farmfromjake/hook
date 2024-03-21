@@ -18,25 +18,49 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final passwordController = TextEditingController();
 
-  //Sign in method
-  void signUserUp() async {
+  bool isChecked = false;
+
+  void showErrorMessage(String message) {
     showDialog(
         context: context,
         builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return AlertDialog(
+            backgroundColor: Colors.redAccent,
+            title: Center(
+              child: Text(
+                textAlign: TextAlign.center,
+                message,
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
           );
         });
+  }
 
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-      Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
-      print(e.code);
-      Navigator.pop(context);
+  //Sign in method
+  void signUserUp() async {
+    if (isChecked) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          });
+
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+        Navigator.pop(context);
+      } on FirebaseAuthException catch (e) {
+        print(e.code);
+        Navigator.pop(context);
+      }
+    } else {
+      showErrorMessage(
+          "You must accept Hook's terms and conditions before creating an account");
     }
   }
 
@@ -102,8 +126,30 @@ class _RegisterPageState extends State<RegisterPage> {
                         ],
                       ),
                       Column(
+                        children: <Widget>[
+                          Text(
+                            "Accept Hook terms and conditions",
+                            style: TextStyle(color: Colors.grey[200]),
+                          ),
+                          Checkbox(
+                            value: isChecked,
+                            checkColor: Colors.white,
+                            activeColor: Colors.orange,
+                            side: const BorderSide(
+                              color: Colors.white,
+                              width: 1.5,
+                            ),
+                            onChanged: (newBool) {
+                              setState(() {
+                                isChecked = newBool!;
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                      Column(
                         children: [
-                          const SizedBox(height: 100),
+                          const SizedBox(height: 75),
                           Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
@@ -114,7 +160,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 child: const Padding(
                                   padding: EdgeInsets.symmetric(vertical: 20.0),
                                   child: Text(
-                                    'Sign In',
+                                    'Create your Account',
                                     style: kBodyText,
                                   ),
                                 )),
