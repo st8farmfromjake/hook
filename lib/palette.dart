@@ -12,14 +12,7 @@ const TextStyle kBodyText = TextStyle(
   color: Colors.white,
 );
 
-const TextStyle kBodyFish = TextStyle(
-  fontSize: 22,
-  fontStyle: FontStyle.italic,
-  color: Colors.white,
-);
-
-const TextStyle kSubHeading = TextStyle(
-  fontSize: 30,
-  fontWeight: FontWeight.bold,
+const TextStyle kBodyButtonText = TextStyle(
+  fontSize: 15,
   color: Colors.white,
 );
