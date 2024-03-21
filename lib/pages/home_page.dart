@@ -52,130 +52,146 @@ class _HomePageState extends State<HomePage> {
           children: [
             const BackgroundImage(),
             SizedBox.expand(
-          child: PageView(
-            controller: controller,
-            onPageChanged: (index) {
-              setState(() {
-                _page = index;
-              });
-            },
-            children: [
-              //replace with pages
-            Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min, // To keep the column's size just as big as its children need.
-                    children: [
-                      const Text(
-                        '\n<º)))><\nHook',
-                        style: kHeading,
-                        textAlign: TextAlign.center, // Center align the text if kHeading doesn't already do so.
-                      ),
-                      const SizedBox(height: 16), // Space between the two texts. Adjust the size as needed.
-                      const Text(
-                        "Test your employees. Improve your scam-awareness. Bolster your security.",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
+              child: PageView(
+                controller: controller,
+                onPageChanged: (index) {
+                  setState(() {
+                    _page = index;
+                  });
+                },
+                children: [
+                  //replace with pages
+                  Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize
+                          .min, // To keep the column's size just as big as its children need.
+                      children: [
+                        const Text(
+                          '\n<º)))><\nHook',
+                          style: kHeading,
+                          textAlign: TextAlign
+                              .center, // Center align the text if kHeading doesn't already do so.
                         ),
-                        textAlign: TextAlign.center, // Ensures text alignment is centered.
-                      ),
-                    Container(
-                        width: 225,
-                        height:75,
-                        margin: const EdgeInsets.only(top:50, left:20, right:20),
-                        decoration: BoxDecoration(
-                        color: Colors.orange,
-                        borderRadius: BorderRadius.circular(16)),
-                        child: const TextButton(
-                            onPressed: null,
-                            child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 20.0),
-                            child: Text(
-                              'Configure Email',
-                              style: kBodyButtonText,
-                            ),
-                        )),
-                      ),
-                      Container(
-                        width: 225,
-                        height: 75,
-                        margin: const EdgeInsets.only(top:25),
-                        decoration: BoxDecoration(
-                        color: Colors.orange,
-                        borderRadius: BorderRadius.circular(16)),
-                        child: const TextButton(
-                            onPressed: null,
-                            child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 20.0),
-                            child: Text(
-                              'View Report',
-                              style: kBodyButtonText,
-                            ),
-                        )),
-                      )                
-                    ],     
+                        const SizedBox(
+                            height:
+                                16), // Space between the two texts. Adjust the size as needed.
+                        const Text(
+                          "Test your employees. Improve your scam-awareness. Bolster your security.",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                          textAlign: TextAlign
+                              .center, // Ensures text alignment is centered.
+                        ),
+                        Container(
+                          width: 225,
+                          height: 75,
+                          margin: const EdgeInsets.only(
+                              top: 50, left: 20, right: 20),
+                          decoration: BoxDecoration(
+                              color: Colors.orange,
+                              borderRadius: BorderRadius.circular(16)),
+                          child: TextButton(
+                              onPressed: () => setState(() {
+                                controller.jumpToPage(2);
+                              }),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 20.0),
+                                child: Text(
+                                  'Configure Email',
+                                  style: kBodyButtonText,
+                                ),
+                              )),
+                        ),
+                        Container(
+                          width: 225,
+                          height: 75,
+                          margin: const EdgeInsets.only(top: 25),
+                          decoration: BoxDecoration(
+                              color: Colors.orange,
+                              borderRadius: BorderRadius.circular(16)),
+                          child: TextButton(
+                              onPressed: () => setState(() {
+                                controller.jumpToPage(1);
+                              }),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 20.0),
+                                child: Text(
+                                  'View Report',
+                                  style: kBodyButtonText,
+                                ),
+                              )),
+                        )
+                      ],
+                    ),
                   ),
-              ),
-              
-              Container(
-                padding: const EdgeInsets.all(30),
-                child: const Column(
-                  mainAxisSize: MainAxisSize.min, // To keep the column as compact as possible.
-                  children: [
-                    Text(
-                        'Reports',
-                        style: kHeading,
-                        textAlign: TextAlign.center, // Center align the text if kHeading doesn't already do so.
-                      ),
-                    // Add other widgets below as needed.
-                  ],
-                ),
-              ),
 
-              const EmailPage(),
-
-              Container(
-                padding: const EdgeInsets.all(30),
-                child: const Column(
-                  mainAxisSize: MainAxisSize.min, // To keep the column as compact as possible.
-                  children: [
-                    Text(
-                        'Profile',
-                        style: kHeading,
-                        textAlign: TextAlign.center, // Center align the text if kHeading doesn't already do so.
-                      ),
-                    // Add other widgets below as needed.
-                  ],
-                ),
-              ),
-
-              Container(
-                padding: const EdgeInsets.all(30),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min, // Keeps the column compact.
-                  children: [
-                    const Text(
-                      'Settings',
-                      style: kHeading,
-                      textAlign: TextAlign.center, // Centers the text.
+                  Container(
+                    padding: const EdgeInsets.all(30),
+                    child: const Column(
+                      mainAxisSize: MainAxisSize
+                          .min, // To keep the column as compact as possible.
+                      children: [
+                        Text(
+                          'Reports',
+                          style: kHeading,
+                          textAlign: TextAlign
+                              .center, // Center align the text if kHeading doesn't already do so.
+                        ),
+                        // Add other widgets below as needed.
+                      ],
                     ),
-                    IconButton(
-                      onPressed: signUserOut,
-                      icon: const Icon(Icons.logout),
-                      color: Colors.white,
-                      iconSize: 60,
-                    ),
-                    const SizedBox(height: 20), // Adds spacing between the icon button and the text.
-                    
-                    // You can add more widgets here as needed.
-                  ],
-                ),
-              ),
+                  ),
 
-            ],
-          ),
-        ),
-      ],
+                  const EmailPage(),
+
+                  Container(
+                    padding: const EdgeInsets.all(30),
+                    child: const Column(
+                      mainAxisSize: MainAxisSize
+                          .min, // To keep the column as compact as possible.
+                      children: [
+                        Text(
+                          'Profile',
+                          style: kHeading,
+                          textAlign: TextAlign
+                              .center, // Center align the text if kHeading doesn't already do so.
+                        ),
+                        // Add other widgets below as needed.
+                      ],
+                    ),
+                  ),
+
+                  Container(
+                    padding: const EdgeInsets.all(30),
+                    child: Column(
+                      mainAxisSize:
+                          MainAxisSize.min, // Keeps the column compact.
+                      children: [
+                        const Text(
+                          'Settings',
+                          style: kHeading,
+                          textAlign: TextAlign.center, // Centers the text.
+                        ),
+                        IconButton(
+                          onPressed: signUserOut,
+                          icon: const Icon(Icons.logout),
+                          color: Colors.white,
+                          iconSize: 60,
+                        ),
+                        const SizedBox(
+                            height:
+                                20), // Adds spacing between the icon button and the text.
+
+                        // You can add more widgets here as needed.
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
         bottomNavigationBar: CurvedNavigationBar(
           index: _page,
