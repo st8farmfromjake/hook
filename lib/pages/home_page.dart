@@ -61,18 +61,17 @@ class _HomePageState extends State<HomePage> {
             },
             children: [
               //replace with pages
-              Container(
-                child: const Center(
+            Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min, // To keep the column's size just as big as its children need.
                     children: [
-                      Text(
-                        '<º)))><\nHook',
+                      const Text(
+                        '\n<º)))><\nHook',
                         style: kHeading,
                         textAlign: TextAlign.center, // Center align the text if kHeading doesn't already do so.
                       ),
-                      SizedBox(height: 16), // Space between the two texts. Adjust the size as needed.
-                      Text(
+                      const SizedBox(height: 16), // Space between the two texts. Adjust the size as needed.
+                      const Text(
                         "Test your employees. Improve your scam-awareness. Bolster your security.",
                         style: TextStyle(
                           color: Colors.white,
@@ -80,10 +79,44 @@ class _HomePageState extends State<HomePage> {
                         ),
                         textAlign: TextAlign.center, // Ensures text alignment is centered.
                       ),
-                    ],
+                    Container(
+                        width: 225,
+                        height:75,
+                        margin: const EdgeInsets.only(top:50, left:20, right:20),
+                        decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(16)),
+                        child: const TextButton(
+                            onPressed: null,
+                            child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 20.0),
+                            child: Text(
+                              'Configure Email',
+                              style: kBodyButtonText,
+                            ),
+                        )),
+                      ),
+                      Container(
+                        width: 225,
+                        height: 75,
+                        margin: const EdgeInsets.only(top:25),
+                        decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(16)),
+                        child: const TextButton(
+                            onPressed: null,
+                            child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 20.0),
+                            child: Text(
+                              'View Report',
+                              style: kBodyButtonText,
+                            ),
+                        )),
+                      )                
+                    ],     
                   ),
-                ),
               ),
+              
               Container(
                 padding: const EdgeInsets.all(30),
                 child: const Column(
