@@ -43,7 +43,7 @@ sendEmail({
         <p>This is the IT department at $companyName.There is an update needed on your computer. </p>
         <p>Please go to <a href="$link">this website</a>, so we can control your computer and help you download this update.</p>
         <p>Thank you,</p>
-        <p>IT Department</p>
+        <p>$fromName</p>
         '''; 
         subject = "Updated Needed";
         break;
@@ -56,7 +56,7 @@ sendEmail({
         <p>I've attached a list of the files that need to be shared, along with the intended recipients. If you could kindly forward the files to the respective individuals and copy me on the emails, I would greatly appreciate it. This will ensure that the project remains on track and we can minimize any potential delays.</p>
         <p>I understand that this is an unconventional request, but I'm in a bind and trust that the team will understand the urgency.</p>
         <p>If you have any questions or concerns, please don't hesitate to reach out,</p>
-        <p>Chuck</p>
+        <p>$fromName</p>
         <p><a href="$link">Needed files.</a></p>
         '''; 
         subject = "Help Needed";
@@ -65,7 +65,7 @@ sendEmail({
         <p>Good afternoon $name,</p>
         <p>We at $companyName want to hear from you, our employees! <a href="$link">Click here</a> to fill out a 5 minute survey about your quality of life here.</p>
         <p>Thank you,</p>
-        <p>HR team</p>
+        <p>$fromName</p>
         '''; 
         subject = "$companyName Survey";
         break;
@@ -100,8 +100,6 @@ sendEmail({
       default: html = '''
       <p>Hello $name</p>
       <p>We are demanding that you give us all of your company's information, because if you don’t then we will leak some very sensitive information about you and your bosses. Please go to <a href="$link">this website</a> and follow ALL instructions carefully and promptly. If we don’t get this information within 24 hours everything will be leaked.</p>
-      <p>Best Wishes,</p>
-      <p>$fromName</p>
       ''';
       subject = "We have your information!";
     }
