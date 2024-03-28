@@ -18,6 +18,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final passwordController = TextEditingController();
 
+  final usernameController = TextEditingController();
+
   bool isChecked = false;
 
   void showErrorMessage(String message) {
@@ -53,6 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
           email: emailController.text,
           password: passwordController.text,
         );
+        await FirebaseAuth.instance.currentUser!.updateDisplayName(usernameController.text);
         Navigator.pop(context);
       } on FirebaseAuthException catch (e) {
         print(e.code);
@@ -67,15 +70,17 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Stack(
+
       children: [
         const BackgroundImage(),
         Scaffold(
+          resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
             body: SafeArea(
                 child: Column(
               children: [
                 Container(
-                  height: 150,
+                  height: 100,
                   child: const Center(
                     child: Text(
                       'Hook',
@@ -84,7 +89,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 100,
+                  height: 75,
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -104,6 +109,14 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
 
                           const SizedBox(height: 25),
+                          MyTextField(
+                            controller: usernameController,
+                            hintText: 'Your Name',
+                            obscureText: false,
+                          ),
+
+                          const SizedBox(height: 10),
+
                           //username textfeild
                           MyTextField(
                             controller: emailController,
@@ -149,7 +162,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       Column(
                         children: [
-                          const SizedBox(height: 75),
+                          const SizedBox(height: 20),
                           Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
