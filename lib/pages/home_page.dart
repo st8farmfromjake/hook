@@ -1,9 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hook/pages/analytics_page.dart';
 import 'package:hook/palette.dart';
 import 'package:flutter/material.dart';
 import '../pages/email_page.dart';
 import '../widgets/widgets.dart';
+import "../widgets/pie_chart.dart";
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -89,11 +91,7 @@ class _HomePageState extends State<HomePage> {
                 child: const Column(
                   mainAxisSize: MainAxisSize.min, // To keep the column as compact as possible.
                   children: [
-                    Text(
-                        'Reports',
-                        style: kHeading,
-                        textAlign: TextAlign.center, // Center align the text if kHeading doesn't already do so.
-                      ),
+                  AnalyticsPage(),
                     // Add other widgets below as needed.
                   ],
                 ),
