@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hook/pages/profile_page.dart';
 import 'package:hook/palette.dart';
 import 'package:flutter/material.dart';
 import '../pages/email_page.dart';
@@ -44,8 +45,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         //WILL REMOVE THE APP BAR ONCE ACCOUNT INFO PAGE IS DONE
         //^^WILL REMOVE WHEN ACCOUNT INFO PAGE IS DONE
         body: Stack(
@@ -134,20 +134,7 @@ class _HomePageState extends State<HomePage> {
 
               const EmailPage(),
 
-              Container(
-                padding: const EdgeInsets.all(30),
-                child: const Column(
-                  mainAxisSize: MainAxisSize.min, // To keep the column as compact as possible.
-                  children: [
-                    Text(
-                        'Profile',
-                        style: kHeading,
-                        textAlign: TextAlign.center, // Center align the text if kHeading doesn't already do so.
-                      ),
-                    // Add other widgets below as needed.
-                  ],
-                ),
-              ),
+              const ProfilePage(),
 
               Container(
                 padding: const EdgeInsets.all(30),
@@ -216,7 +203,6 @@ class _HomePageState extends State<HomePage> {
             });
           },
         ),
-      ),
     );
     // Column(
     //         mainAxisAlignment: MainAxisAlignment.center,
