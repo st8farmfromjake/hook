@@ -58,9 +58,26 @@ class _ProfilePageState extends State<ProfilePage> {
                           decoration: BoxDecoration(
                           color: Colors.orange,
                           borderRadius: BorderRadius.circular(16)),
-                          child: const TextButton(
-                              onPressed: null,
-                              child: Text(
+                          child: TextButton(
+                              onPressed: () => showDialog(
+                                context: context,
+                                builder: (_) => AlertDialog(
+                                  title: const Text('Configure Display Name'),
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(20))),
+                                  scrollable: true,
+                                  content: const Text('''null'''),
+                                  actionsAlignment: MainAxisAlignment.center,
+                                  actions: [
+                                    OutlinedButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: const Text('✓'),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              child: const Text(
                                 'Configure Display Name',
                                 style: kProfileButton,
                               ),
@@ -73,9 +90,26 @@ class _ProfilePageState extends State<ProfilePage> {
                           decoration: BoxDecoration(
                           color: Colors.orange,
                           borderRadius: BorderRadius.circular(16)),
-                          child: const TextButton(
-                              onPressed: null,
-                              child: Text(
+                          child: TextButton(
+                              onPressed: () => showDialog(
+                                context: context,
+                                builder: (_) => AlertDialog(
+                                  title: const Text('Configure Company Name'),
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(20))),
+                                  scrollable: true,
+                                  content: const Text('''null'''),
+                                  actionsAlignment: MainAxisAlignment.center,
+                                  actions: [
+                                    OutlinedButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: const Text('✓'),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              child: const Text(
                                 'Configure Company Name',
                                 style: kProfileButton,
                               ),
@@ -88,9 +122,26 @@ class _ProfilePageState extends State<ProfilePage> {
                           decoration: BoxDecoration(
                           color: Colors.orange,
                           borderRadius: BorderRadius.circular(16)),
-                          child: const TextButton(
-                              onPressed: null,
-                              child: Text(
+                          child: TextButton(
+                              onPressed: () => showDialog(
+                                context: context,
+                                builder: (_) => AlertDialog(
+                                  title: const Text('Configure Email'),
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(20))),
+                                  scrollable: true,
+                                  content: const Text('''null'''),
+                                  actionsAlignment: MainAxisAlignment.center,
+                                  actions: [
+                                    OutlinedButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: const Text('✓'),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              child: const Text(
                                 'Configure Email',
                                 style: kProfileButton,
                               ),
@@ -103,9 +154,26 @@ class _ProfilePageState extends State<ProfilePage> {
                           decoration: BoxDecoration(
                           color: Colors.orange,
                           borderRadius: BorderRadius.circular(16)),
-                          child: const TextButton(
-                              onPressed: null,
-                              child: Text(
+                          child: TextButton(
+                              onPressed: () => showDialog(
+                                context: context,
+                                builder: (_) => AlertDialog(
+                                  title: const Text('Reset Password'),
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(20))),
+                                  scrollable: true,
+                                  content: const Text('''null'''),
+                                  actionsAlignment: MainAxisAlignment.center,
+                                  actions: [
+                                    OutlinedButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: const Text('✓'),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              child: const Text(
                                 'Reset Password',
                                 style: kProfileButton,
                               ),
