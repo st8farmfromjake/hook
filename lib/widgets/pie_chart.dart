@@ -24,7 +24,7 @@ class MyPieChart extends StatelessWidget {
               radius: radius, // Use the calculated radius
             ),
             PieChartSectionData(
-              value: 20,
+              value: 50,
               color: Colors.orange,
               radius: radius,
             ),

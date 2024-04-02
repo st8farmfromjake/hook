@@ -134,22 +134,7 @@ class _HomePageState extends State<HomePage> {
 
                   const ProfilePage(),
 
-                  Container(
-                    padding: const EdgeInsets.all(30),
-                    child: const Column(
-                      mainAxisSize: MainAxisSize
-                          .min, // To keep the column as compact as possible.
-                      children: [
-                        Text(
-                          'Profile',
-                          style: kHeading,
-                          textAlign: TextAlign
-                              .center, // Center align the text if kHeading doesn't already do so.
-                        ),
-                        // Add other widgets below as needed.
-                      ],
-                    ),
-                  ),
+                  
 
                   Container(
                     padding: const EdgeInsets.all(30),
