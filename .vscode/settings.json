@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "/Users/michaelwoll/code/hook/linux"
+    "cmake.sourceDirectory": "/Users/michaelwoll/code/hook/linux",
+    "java.compile.nullAnalysis.mode": "disabled"
 }
