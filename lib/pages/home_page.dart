@@ -44,8 +44,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         //WILL REMOVE THE APP BAR ONCE ACCOUNT INFO PAGE IS DONE
         //^^WILL REMOVE WHEN ACCOUNT INFO PAGE IS DONE
         body: Stack(
@@ -237,8 +236,8 @@ class _HomePageState extends State<HomePage> {
             });
           },
         ),
-      ),
-    );
+      );
+    
     // Column(
     //         mainAxisAlignment: MainAxisAlignment.center,
     //         children: [
