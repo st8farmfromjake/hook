@@ -16,3 +16,13 @@ const TextStyle kBodyButtonText = TextStyle(
   fontSize: 15,
   color: Colors.white,
 );
+
+const TextStyle kEmailText = TextStyle(
+  fontSize: 18,
+  color: Color.fromARGB(255, 155, 154, 154),
+);
+
+const TextStyle kProfileButton = TextStyle(
+  fontSize: 18,
+  color: Colors.white,
+);
