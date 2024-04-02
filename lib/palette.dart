@@ -12,3 +12,7 @@ const TextStyle kBodyText = TextStyle(
   color: Colors.white,
 );
 
+const TextStyle kBodyButtonText = TextStyle(
+  fontSize: 15,
+  color: Colors.white,
+);
