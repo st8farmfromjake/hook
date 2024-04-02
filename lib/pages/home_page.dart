@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hook/pages/analytics_page.dart';
 import 'package:hook/pages/profile_page.dart';
 import 'package:hook/palette.dart';
 import 'package:flutter/material.dart';
@@ -127,26 +128,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 
-                  Container(
-                    padding: const EdgeInsets.all(30),
-                    child: const Column(
-                      mainAxisSize: MainAxisSize
-                          .min, // To keep the column as compact as possible.
-                      children: [
-                        Text(
-                          'Reports',
-                          style: kHeading,
-                          textAlign: TextAlign
-                              .center, // Center align the text if kHeading doesn't already do so.
-                        ),
-                        // Add other widgets below as needed.
-                      ],
-                    ),
-                  ),
+                  const AnalyticsPage(),
 
                   const EmailPage(),
 
-              const ProfilePage(),
+                  const ProfilePage(),
+
+                  
 
                   Container(
                     padding: const EdgeInsets.all(30),
@@ -280,7 +268,7 @@ class TabPage extends StatelessWidget {
                   builder: (context) => Page(tab: tab),
                 ));
               },
-              child: Text('go to page'),
+              child: const Text('go to page'),
             )
           ],
         ),
