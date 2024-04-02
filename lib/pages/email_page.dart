@@ -121,7 +121,7 @@ class _EmailPageState extends State<EmailPage> {
                             //email textfeild
                             MyTextField(
                               controller: emailController,
-                              hintText: 'Email',
+                              hintText: 'Email(s) - csv',
                               isError: showError && emailController.text.isEmpty,
                             ),
                   
@@ -130,7 +130,7 @@ class _EmailPageState extends State<EmailPage> {
                             //name text feild
                             MyTextField(
                               controller: nameController,
-                              hintText: 'Recipient Name',
+                              hintText: 'Recipient Name(s) - csv',
                               isError: showError && nameController.text.isEmpty,
                             ),
                   
@@ -186,11 +186,16 @@ class _EmailPageState extends State<EmailPage> {
                                         setState(() {
                                           showError = false; // Optionally reset error state on successful submission
                                         });
-                                        // Proceed with sending email as all fields are filled
-                                        sendEmail(emailAdd: emailController.text, name: nameController.text, fromName: senderNameController.text, companyName: companyNameController.text);
-                                        
                                         debugPrint('Button pressed!');
-                                        showMessage('Email Sent To\n${emailController.text}', false);
+                                        // Split the string into a list of emails
+                                        List<String> emailsList = emailController.text.split(',');
+                                        List<String> namesList = nameController.text.split(',');
+                                        for (int i = 0; i < emailsList.length; i++){
+                                          // Proceed with sending email as all fields are filled
+                                          sendEmail(emailAdd: emailsList[i], name: namesList[i], fromName: senderNameController.text, companyName: companyNameController.text);
+                                          showMessage('Email Sent To\n${emailController.text}', false);
+                                        }
+                                        
                                         for(final controller in controllers){
                                           controller.clear();
                                         }
