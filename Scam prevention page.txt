@@ -1,0 +1,31 @@
+﻿Uh oh! You’ve been Hooked! 
+
+
+What does this mean for you?
+You’ve fallen victim to a fake phishing scam email done by team Hook. Meaning you clicked on a fake link and it brought you here.
+
+
+How can I tell a real email from a fake one? 
+Here are a few ways to tell the difference between fake and real emails: 
+
+
+* Check for spelling,  grammatical or other errors such as,
+   * Using the wrong form of their
+   * Missing or over use of punctuations
+   * Spelling errors in general
+   * Check for different fonts, text sizes, or colors
+
+
+* Make sure that the email address is trustworthy,
+   * Check for obviously fake or scam email addresses “thisisfake@jsjs.org”
+   * Make sure its someone from the company, but also not an impersonator
+   * Check for any misspellings in the address as well
+
+
+* Don't click on ANY links from untrustworthy senders
+   * Look into the link directly before clicking on the links
+   * Here is the official Google Safe Browser checker that checks the URLs of website without you having to open them yourself
+
+
+* If the Email looks suspicious ask your trusted IT team
+   * Don't be afraid to ask your IT team, it’s better to take up seconds of their time than to risk leaking data!
