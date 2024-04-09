@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 
-                  const AnalyticsPage(),
+                  const AnalyticsPage(backgroundImage: '',),
 
                   const EmailPage(),
 
