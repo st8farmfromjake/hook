@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hook/widgets/pie_chart.dart';
-import 'package:hook/palette.dart';
 
 
 class AnalyticsPage extends StatefulWidget {
@@ -14,6 +13,9 @@ class AnalyticsPage extends StatefulWidget {
 
 class _AnalyticsPageState extends State<AnalyticsPage> {
   int overallValue = 69;
+  int totalEmailsSent = 0;
+  int totalLinksClicked = 0;
+  int clickThroughRate = 0;
 
   Color _getColorForValue(int overallValue) {
     if (overallValue >= 80) {
@@ -88,7 +90,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: _buildStatWidget('Total Emails Sent', '0'), 
+                      child: _buildStatWidget('Total Emails Sent', totalEmailsSent), 
                     ),
                     Container(
                       height: 200.0,
@@ -96,7 +98,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                       color: Colors.grey[400],
                     ),
                     Expanded(
-                      child: _buildStatWidget('Total Links Clicked', '0'),
+                      child: _buildStatWidget('Total Links Clicked', totalLinksClicked),
                     ),
                   ],
                 ),
@@ -110,8 +112,8 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: _buildStatWidget('Click Through Rate', '0%'), 
+                    Expanded( //change this to a percent_indicator
+                      child: _buildStatWidget('Click Through Rate', clickThroughRate), //change to String so it can have a percentage
                     ),
                     Container(
                       height: 200.0,
@@ -165,7 +167,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
   }
   }
 
-  Widget _buildStatWidget(String title, String value) {
+  Widget _buildStatWidget(String title, int value) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -188,7 +190,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
           ),
           child: Center(
             child: Text(
-              value,
+              '$value',
               style: const TextStyle(
                 fontSize: 20,
                 color: Colors.white,
