@@ -19,6 +19,11 @@ class _ProfilePageState extends State<ProfilePage> {
   String displayName = user.displayName.toString();
   String email = user.email.toString();
 
+  var displayNameController = TextEditingController();
+  var passwordController = TextEditingController();
+  var companyNameController = TextEditingController();
+  var emailController = TextEditingController();
+
     return Scaffold(
         body: Stack(
           children: [
@@ -27,7 +32,9 @@ class _ProfilePageState extends State<ProfilePage> {
               child: PageView(
                 children: [
                   Center(
-                    child: Column(
+                    child: SingleChildScrollView(
+
+                      child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const CircleAvatar(
@@ -67,11 +74,22 @@ class _ProfilePageState extends State<ProfilePage> {
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(20))),
                                   scrollable: true,
-                                  content: const Text('''null'''),
+                                  content: TextFormField(
+                                    decoration: const InputDecoration(hintText: "Username"),
+                                    controller: displayNameController,
+                                  ),  
                                   actionsAlignment: MainAxisAlignment.center,
                                   actions: [
                                     OutlinedButton(
-                                      onPressed: () => Navigator.pop(context),
+                                      onPressed: () async {
+
+                                        var newDisplayName = displayNameController.text;
+                                        user.updateDisplayName(newDisplayName);
+
+                                        setState(() {});
+                                        Navigator.pop(context);
+                                      },
+                                      
                                       child: const Text('✓'),
                                     )
                                   ],
@@ -99,11 +117,20 @@ class _ProfilePageState extends State<ProfilePage> {
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(20))),
                                   scrollable: true,
-                                  content: const Text('''null'''),
+                                  content: TextFormField(
+                                    decoration: const InputDecoration(hintText: "Company Name"),
+                                    controller: companyNameController,
+                                  ),  
                                   actionsAlignment: MainAxisAlignment.center,
                                   actions: [
                                     OutlinedButton(
-                                      onPressed: () => Navigator.pop(context),
+                                      onPressed: () async {
+
+                                        var newDisplayCompanyName = companyNameController.text;
+
+                                        setState(() {});
+                                        Navigator.pop(context);
+                                      },
                                       child: const Text('✓'),
                                     )
                                   ],
@@ -131,11 +158,20 @@ class _ProfilePageState extends State<ProfilePage> {
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(20))),
                                   scrollable: true,
-                                  content: const Text('''null'''),
+                                  content: TextFormField(
+                                    decoration: const InputDecoration(hintText: "Email"),
+                                    controller: emailController,
+                                  ), 
                                   actionsAlignment: MainAxisAlignment.center,
                                   actions: [
                                     OutlinedButton(
-                                      onPressed: () => Navigator.pop(context),
+                                      onPressed: () async {
+
+                                        var newEmail = emailController.text;
+
+                                        setState(() {});
+                                        Navigator.pop(context);
+                                      },
                                       child: const Text('✓'),
                                     )
                                   ],
@@ -163,11 +199,21 @@ class _ProfilePageState extends State<ProfilePage> {
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(20))),
                                   scrollable: true,
-                                  content: const Text('''null'''),
+                                  content: TextFormField(
+                                    decoration: const InputDecoration(hintText: "Password"),
+                                    controller: passwordController,
+                                  ), 
                                   actionsAlignment: MainAxisAlignment.center,
                                   actions: [
                                     OutlinedButton(
-                                      onPressed: () => Navigator.pop(context),
+                                      onPressed: () async {
+
+                                        var newPassword = passwordController.text;
+                                        user.updatePassword(newPassword);
+
+                                        setState(() {});
+                                        Navigator.pop(context);
+                                      },
                                       child: const Text('✓'),
                                     )
                                   ],
@@ -228,6 +274,7 @@ If you have any questions about these terms of service, please contact us at sup
                           ),
                         ),
                       ]
+                    )
                     )
                   )
                 ]
