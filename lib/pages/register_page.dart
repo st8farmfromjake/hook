@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hook/components/my_textfield.dart';
 import 'package:hook/palette.dart';
 import '../widgets/widgets.dart';
+import 'package:hook/api_service.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
@@ -56,6 +57,13 @@ class _RegisterPageState extends State<RegisterPage> {
           password: passwordController.text,
         );
         await FirebaseAuth.instance.currentUser!.updateDisplayName(usernameController.text);
+        try {
+          final result = await ApiService().createNewLink();
+          print('Path: ${result['path']}');
+          print('Id: ${result['linkId']}');
+        } catch (e) {
+          print('Error creating link: $e');
+        }
         Navigator.pop(context);
       } on FirebaseAuthException catch (e) {
         print(e.code);
