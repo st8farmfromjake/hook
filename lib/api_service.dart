@@ -10,7 +10,7 @@ class ApiService {
     const String baseUrl = "https://api-v2.short.io/statistics/link/";
     // Construct the full URL with query parameters using the Uri class
     final uri = Uri.parse("$baseUrl$linkID").replace(queryParameters: {
-      'period': 'today',
+      'period': 'total',
       'tz': 'UTC',
     });
 

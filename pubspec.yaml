@@ -43,7 +43,6 @@ dependencies:
   curved_navigation_bar: ^1.0.3
   fl_chart: ^0.63.0
   http: ^1.2.0
-  cloud_firestore: ^4.15.8
 
 dev_dependencies:
   flutter_test:

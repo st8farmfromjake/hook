@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:hook/widgets/pie_chart.dart'; 
 import 'package:hook/api_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AnalyticsPage extends StatefulWidget {
   const AnalyticsPage({Key? key});
