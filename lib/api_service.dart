@@ -1,12 +1,17 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class ApiService { 
+class ApiService {
+  static final ApiService _instance = ApiService._internal();
+  factory ApiService() {
+      return _instance;
+  }
+  ApiService._internal();
   static const String _apiKey = "sk_CQhvilZt4avQJCg6"; // Consider moving sensitive info like API keys to a secure place
   static int _cachedLinksClicked = 0;
   static const String _domain = 'link.wolltechnologies.com';
 
-  Future<int> getTotalClicks({String? linkID='lnk_4oZz_N7F0JFRThspRuuc3UGvj3'}) async {
+  Future<int> getTotalClicks(String linkID) async {
     const String baseUrl = "https://api-v2.short.io/statistics/link/";
     // Construct the full URL with query parameters using the Uri class
     final uri = Uri.parse("$baseUrl$linkID").replace(queryParameters: {

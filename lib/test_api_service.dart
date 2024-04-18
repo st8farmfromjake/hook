@@ -7,12 +7,12 @@ void main() async {
   var apiService = ApiService();
 
   // Assuming you have a method called getTotalClicks that takes a linkID
-  try {
-    var totalClicks = await apiService.getTotalClicks(); // Use your actual link ID here
-    print("Total Clicks: $totalClicks");
-  } catch (e) {
-    print("Error fetching data: $e");
-  }
+  // try {
+  //   var totalClicks = await apiService.getTotalClicks(); // Use your actual link ID here
+  //   print("Total Clicks: $totalClicks");
+  // } catch (e) {
+  //   print("Error fetching data: $e");
+  // }
   // try {
   //   final result = await ApiService().createNewLink();
   //   print('Path: ${result['path']}');

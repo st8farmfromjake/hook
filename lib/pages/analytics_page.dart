@@ -1,8 +1,10 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:hook/test_firestore.dart';
 import 'package:hook/widgets/pie_chart.dart'; 
 import 'package:hook/api_service.dart';
+
 
 class AnalyticsPage extends StatefulWidget {
   const AnalyticsPage({Key? key});
@@ -13,8 +15,30 @@ class AnalyticsPage extends StatefulWidget {
 }
   class _AnalyticsPageState extends State<AnalyticsPage>{
     int overallValue = 69;
-    int emailsSent = 10;
-    int linksClicked = ApiService.getCachedLinksClicked();
+    int emailsSent = 0;
+    int linksClicked = 0;
+    void getLinkData() async {
+      List<dynamic> documentData = await fetchDocument();
+      if (documentData.isNotEmpty) {
+        String linkId = documentData[1];
+        int emails = documentData[2];
+        
+        // Correct the API service method call:
+        int linkClicks = await ApiService().getTotalClicks(linkId);
+        
+        setState(() {
+            emailsSent = emails;  // Update emails sent from Firestore.
+            linksClicked = linkClicks;  // Update links clicked from API.
+        });
+
+        print('Path: ${documentData[0]}');
+        print('LinkID: $linkId');
+        print('Total Emails Sent: $emails');
+      } else {
+        print("No data found in document!");
+      }
+    }
+
   
     Color _getColorForValue(int overallValue) {
       if (overallValue >= 80) {
@@ -27,19 +51,10 @@ class AnalyticsPage extends StatefulWidget {
     }
     @override
     void initState() {
-      super.initState();
-      refreshLinksClicked();
+        super.initState();
+        getLinkData();  // This will fetch data when the widget loads
     }
-    
-
-  void refreshLinksClicked() async {
-    await ApiService().getTotalClicks();
-    // Update the UI with the cached value after refreshing
-    setState(() {
-      linksClicked = ApiService.getCachedLinksClicked();
-    });
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     Color circleColor = _getColorForValue(overallValue);
