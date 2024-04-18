@@ -1,6 +1,5 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'firestore.dart';
 
 class ApiService { 
   static const String _apiKey = "sk_CQhvilZt4avQJCg6"; // Consider moving sensitive info like API keys to a secure place
@@ -54,10 +53,6 @@ class ApiService {
       // Assuming 'path' and 'idString' are the keys in the response
       final String path = data['path'];
       final String linkId = data['idString'];
-      await updateDocument("unique_document_id", {
-        "linkId": linkId,
-        "path": path
-      });
       // You could directly return these values, or save them as needed
       return {'path': path, 'linkId': linkId};
     } else {
