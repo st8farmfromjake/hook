@@ -21,7 +21,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   var displayNameController = TextEditingController();
   var passwordController = TextEditingController();
-  var companyNameController = TextEditingController();
+  var companyNameController = TextEditingController(); 
   var emailController = TextEditingController();
 
     return Scaffold(
