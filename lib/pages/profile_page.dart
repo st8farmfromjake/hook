@@ -11,6 +11,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 final FirebaseAuth auth = FirebaseAuth.instance;
+String curImage = 'assets/pfp.jpg';
 
 class _ProfilePageState extends State<ProfilePage> {
   @override
@@ -21,9 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   var displayNameController = TextEditingController();
   var passwordController = TextEditingController();
-  var companyNameController = TextEditingController(); 
-  var emailController = TextEditingController();
-
+  
     return Scaffold(
         body: Stack(
           children: [
@@ -37,9 +36,26 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const CircleAvatar(
-                          radius: 50,
-                          backgroundImage: AssetImage('assets/pfp.jpg'),
+                        Container(
+                          width: 150,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: const Border.symmetric(
+                              horizontal: BorderSide(
+                                color: Colors.white,
+                                width: 3
+                              ),
+                              vertical: BorderSide(
+                                color: Colors.white,
+                                width: 3
+                              )
+                            ),
+                            image: DecorationImage(
+                              image: AssetImage(curImage),
+                              fit: BoxFit.fill
+                            )
+                          )
                         ),
                         const SizedBox(
                           height: 20,
@@ -85,6 +101,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                                         var newDisplayName = displayNameController.text;
                                         user.updateDisplayName(newDisplayName);
+                                        
 
                                         setState(() {});
                                         Navigator.pop(context);
@@ -112,21 +129,112 @@ class _ProfilePageState extends State<ProfilePage> {
                               onPressed: () => showDialog(
                                 context: context,
                                 builder: (_) => AlertDialog(
-                                  title: const Text('Configure Company Name'),
+                                  title: const Text('Configure Profile Picture'),
                                   shape: const RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(20))),
                                   scrollable: true,
-                                  content: TextFormField(
-                                    decoration: const InputDecoration(hintText: "Company Name"),
-                                    controller: companyNameController,
-                                  ),  
+                                  content: Column(
+                                    children: [
+                                      Row(
+                                      children: [
+                                        SizedBox(
+                                          height: 93,
+                                          width: 93,
+                                          child: IconButton(
+                                            padding: const EdgeInsets.only(right:5),
+                                            icon: Image.asset('assets/fish1.png'),
+                                            iconSize: 20,
+                                            onPressed: () {
+                                              curImage = 'assets/fish1.png';
+                                              setState(() {});
+                                              Navigator.pop(context);
+                                            },
+                                          )
+                                        ), 
+                                        SizedBox(
+                                          height: 93,
+                                          width: 93,
+                                          child: IconButton(
+                                            padding: const EdgeInsets.only(right:5, left:5),
+                                            icon: Image.asset('assets/fish2.png'),
+                                            iconSize: 20,
+                                            onPressed: () {
+                                              curImage = 'assets/fish2.png';
+                                              setState(() {});
+                                              Navigator.pop(context);
+                                            },
+                                          )
+                                        ),  
+                                        SizedBox(
+                                          height: 93,
+                                          width: 93,
+                                          child: IconButton(
+                                            padding: const EdgeInsets.only(left:5),
+                                            icon: Image.asset('assets/fish3.png'),
+                                            iconSize: 20,
+                                            onPressed: () {
+                                              curImage = 'assets/fish3.png';
+                                              setState(() {});
+                                              Navigator.pop(context);
+                                            },
+                                          )
+                                        ),   
+                                      ]
+                                    ),
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          height: 93,
+                                          width: 93,
+                                          child: IconButton(
+                                            padding: const EdgeInsets.only(right:5),
+                                            icon: Image.asset('assets/fish4.png'),
+                                            iconSize: 20,
+                                            onPressed: () {
+                                              curImage = 'assets/fish4.png';
+                                              setState(() {});
+                                              Navigator.pop(context);
+                                            },
+                                          )
+                                        ),
+                                        SizedBox(
+                                          height: 93,
+                                          width: 93,
+                                          child: IconButton(
+                                            padding: const EdgeInsets.only(left:5, right:5),
+                                            icon: Image.asset('assets/fish5.png'),
+                                            iconSize: 20,
+                                            onPressed: () {
+                                              curImage = 'assets/fish5.png';
+                                              setState(() {});
+                                              Navigator.pop(context);
+                                            },
+                                          )
+                                        ),
+                                        SizedBox(
+                                          height: 93,
+                                          width: 93,
+                                          child: IconButton(
+                                            padding: const EdgeInsets.only(left:5),
+                                            icon: Image.asset('assets/fish6.jpg'),
+                                            iconSize: 20,
+                                            onPressed: () {
+                                              curImage = 'assets/fish6.jpg';
+                                              setState(() {});
+                                              Navigator.pop(context);
+                                            },
+                                          )
+                                        ),
+                                      ] 
+                                    )
+                                  ],
+                                ),
+                                
                                   actionsAlignment: MainAxisAlignment.center,
                                   actions: [
                                     OutlinedButton(
                                       onPressed: () async {
-
-                                        var newDisplayCompanyName = companyNameController.text;
 
                                         setState(() {});
                                         Navigator.pop(context);
@@ -137,52 +245,54 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               child: const Text(
-                                'Configure Company Name',
+                                'Configure Profile Picture',
                                 style: kProfileButton,
                               ),
                           ),
                         ),
-                        Container(
-                          width: 350,
-                          height:50,
-                          margin: const EdgeInsets.only(top:20, left:20, right:20),
-                          decoration: BoxDecoration(
-                          color: Colors.orange,
-                          borderRadius: BorderRadius.circular(16)),
-                          child: TextButton(
-                              onPressed: () => showDialog(
-                                context: context,
-                                builder: (_) => AlertDialog(
-                                  title: const Text('Configure Email'),
-                                  shape: const RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(20))),
-                                  scrollable: true,
-                                  content: TextFormField(
-                                    decoration: const InputDecoration(hintText: "Email"),
-                                    controller: emailController,
-                                  ), 
-                                  actionsAlignment: MainAxisAlignment.center,
-                                  actions: [
-                                    OutlinedButton(
-                                      onPressed: () async {
+                        // Container(
+                        //   width: 350,
+                        //   height:50,
+                        //   margin: const EdgeInsets.only(top:20, left:20, right:20),
+                        //   decoration: BoxDecoration(
+                        //   color: Colors.orange,
+                        //   borderRadius: BorderRadius.circular(16)),
+                        //   child: TextButton(
+                        //       onPressed: () => showDialog(
+                        //         context: context,
+                        //         builder: (_) => AlertDialog(
+                        //           title: const Text('Configure Email'),
+                        //           shape: const RoundedRectangleBorder(
+                        //               borderRadius:
+                        //                   BorderRadius.all(Radius.circular(20))),
+                        //           scrollable: true,
+                        //           content: TextFormField(
+                        //             decoration: const InputDecoration(hintText: "Email"),
+                        //             controller: emailController,
+                        //           ), 
+                        //           actionsAlignment: MainAxisAlignment.center,
+                        //           actions: [
+                        //             OutlinedButton(
+                        //               onPressed: () async {
 
-                                        var newEmail = emailController.text;
+                        //                 var newEmail = emailController.text;
+                        //                 user.verifyBeforeUpdateEmail(newEmail);
+                                        
 
-                                        setState(() {});
-                                        Navigator.pop(context);
-                                      },
-                                      child: const Text('✓'),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              child: const Text(
-                                'Configure Email',
-                                style: kProfileButton,
-                              ),
-                          ),
-                        ),
+                        //                 setState(() {});
+                        //                 Navigator.pop(context);
+                        //               },
+                        //               child: const Text('✓'),
+                        //             )
+                        //           ],
+                        //         ),
+                        //       ),
+                        //       child: const Text(
+                        //         'Configure Email',
+                        //         style: kProfileButton,
+                        //       ),
+                        //   ),
+                        // ),
                         Container(
                           width: 350,
                           height:50,
