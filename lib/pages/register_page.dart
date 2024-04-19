@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hook/components/my_textfield.dart';
@@ -56,11 +57,21 @@ class _RegisterPageState extends State<RegisterPage> {
           email: emailController.text,
           password: passwordController.text,
         );
-        await FirebaseAuth.instance.currentUser!.updateDisplayName(usernameController.text);
+        await FirebaseAuth.instance.currentUser!
+            .updateDisplayName(usernameController.text);
         try {
           final result = await ApiService().createNewLink();
           print('Path: ${result['path']}');
           print('Id: ${result['linkId']}');
+          //set firestore data for user
+          //JAKE ADDED
+          FirebaseFirestore.instance
+              .collection("user_email_info")
+              .doc(FirebaseAuth.instance.currentUser!.email)
+              .set(
+            {"linkID": result['linkId'], "path": result['path'], "totalEmailsSent": 0},
+          );
+          //END OF JAKE ADDED
         } catch (e) {
           print('Error creating link: $e');
         }
@@ -78,11 +89,10 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-
       children: [
         const BackgroundImage(),
         Scaffold(
-          resizeToAvoidBottomInset: false,
+            resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
             body: SafeArea(
                 child: Column(
