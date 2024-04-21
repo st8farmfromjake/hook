@@ -75,10 +75,15 @@ class _RegisterPageState extends State<RegisterPage> {
         } catch (e) {
           print('Error creating link: $e');
         }
-        Navigator.pop(context);
+        if(mounted){
+          Navigator.pop(context);
+        }
       } on FirebaseAuthException catch (e) {
+        if(mounted){
+          Navigator.pop(context);
+        }
         print(e.code);
-        Navigator.pop(context);
+        
       }
     } else {
       showErrorMessage(
