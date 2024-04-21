@@ -10,7 +10,7 @@ sendEmail({
   required String name, 
   required String fromName, 
   required String companyName, 
-  link = 'https://link.novusomni.com/hook'
+  required String link
   }) async {
     // If emailNum is null, generate a random number within the range of email cases
     emailNum = Random().nextInt(8); 

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 final FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -8,7 +9,9 @@ void main() {
 
 Future<List<dynamic>> fetchDocument() async {
   try {
-    DocumentSnapshot doc = await db.collection("user_email_info").doc("test@gmail.com").get();
+    final User user = FirebaseAuth.instance.currentUser!;
+    String email = user.email.toString();
+    DocumentSnapshot doc = await db.collection("user_email_info").doc(email).get();
     if (doc.exists) {
       final data = doc.data() as Map<String, dynamic>;
       return [

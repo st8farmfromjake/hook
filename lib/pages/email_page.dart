@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hook/api_service.dart';
 import 'package:hook/components/my_textfield.dart';
 import 'package:hook/palette.dart';
 import '../widgets/widgets.dart';
@@ -20,6 +21,7 @@ class _EmailPageState extends State<EmailPage> {
   final TextEditingController companyNameController = TextEditingController();
   final TextEditingController senderNameController = TextEditingController();
   late final List<TextEditingController> controllers;
+  late final String path;
 
   bool showError = false;
 
@@ -32,6 +34,28 @@ class _EmailPageState extends State<EmailPage> {
       senderNameController,
     ];
   }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchPath();
+  }
+
+  void fetchPath() async {
+    final db = FirebaseFirestore.instance;
+    final userEmail = FirebaseAuth.instance.currentUser?.email;
+    final docRef = db.collection("user_email_info").doc(userEmail);
+    try {
+      DocumentSnapshot doc = await docRef.get();
+      final data = doc.data() as Map<String, dynamic>;
+      setState(() {
+        path = data['path']; // Now path is initialized and ready to use.
+      });
+    } catch (e) {
+      print("Error getting document: $e");
+    }
+  }
+
 
   @override
   void dispose() {
@@ -200,53 +224,38 @@ class _EmailPageState extends State<EmailPage> {
                                   borderRadius: BorderRadius.circular(16)),
                               child: TextButton(
                                   onPressed: () {
-                                    // Check if any of the fields are empty.
-                                    if (emailController.text.isEmpty ||
-                                        nameController.text.isEmpty ||
-                                        companyNameController.text.isEmpty ||
-                                        senderNameController.text.isEmpty) {
-                                      //update showError to true and reset the state
-                                      setState(() {
-                                        showError = true;
-                                      });
-                                      // Call showErrorMessage if any field is empty
-                                      showMessage(
-                                          'Please fill in all the fields.',
-                                          true);
-                                    } else {
-                                      setState(() {
-                                        showError =
-                                            false; // Optionally reset error state on successful submission
-                                      });
-                                      debugPrint('Button pressed!');
-                                      // Split the string into a list of emails
-                                      List<String> emailsList =
-                                          emailController.text.split(',');
-                                      List<String> namesList =
-                                          nameController.text.split(',');
-                                      for (int i = 0;
-                                          i < emailsList.length;
-                                          i++) {
-                                        // Proceed with sending email as all fields are filled
-                                        sendEmail(
-                                            emailAdd: emailsList[i],
-                                            name: namesList[i],
-                                            fromName: senderNameController.text,
-                                            companyName:
-                                                companyNameController.text);
-                                        showMessage(
-                                            'Email Sent To\n${emailController.text}',
-                                            false);
-                                        //JAKE ADDED THIS
-                                        //update firebase total emails sent
-                                        updateTotalEmailsSent();
-                                        //JAKE ADDED THIS
-                                      }
-
-                                      for (final controller in controllers) {
-                                        controller.clear();
-                                      }
+                                    if (path == null || path.isEmpty) {
+                                      showMessage('Path is not yet initialized. Please wait.', true);
+                                      return;
                                     }
+                                    
+                                    if (emailController.text.isEmpty || nameController.text.isEmpty || companyNameController.text.isEmpty || senderNameController.text.isEmpty) {
+                                      // Show error message
+                                      showMessage('Please fill in all the fields.', true);
+                                      return;
+                                    }
+                                    
+                                    setState(() {
+                                      showError = false; // Optionally reset error state on successful submission
+                                    });
+                                    
+                                    debugPrint('Button pressed!');
+                                    List<String> emailsList = emailController.text.split(',');
+                                    List<String> namesList = nameController.text.split(',');
+                                    
+                                    for (int i = 0; i < emailsList.length; i++) {
+                                      sendEmail(
+                                        emailAdd: emailsList[i],
+                                        name: namesList[i],
+                                        fromName: senderNameController.text,
+                                        companyName: companyNameController.text,
+                                        link: 'https://link.wolltechnologies.com/$path'
+                                      );
+                                      showMessage('Email Sent To\n${emailController.text}', false);
+                                      updateTotalEmailsSent();
+                                    }
+                                    
+                                    controllers.forEach((controller) => controller.clear());
                                   },
                                   child: const Padding(
                                     padding:

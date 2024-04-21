@@ -136,34 +136,33 @@ class _HomePageState extends State<HomePage> {
 
                   
 
-                  Container(
-                    padding: const EdgeInsets.all(30),
-                    child: Column(
-                      mainAxisSize:
-                          MainAxisSize.min, // Keeps the column compact.
-                      children: [
-                        const SizedBox(
-                            height:
-                                200),
-                        const Text(
-                          'Are you sure you want to sign out?',
-                          style: kHeading,
-                          textAlign: TextAlign.center, // Centers the text.
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        IconButton(
-                          onPressed: signUserOut,
-                          icon: const Icon(Icons.logout),
-                          color: Colors.white,
-                          iconSize: 100,
-                        ),
-                        const SizedBox(
-                            height:
-                                20), // Adds spacing between the icon button and the text.
-                        // You can add more widgets here as needed.
-                      ],
+                  Center(
+                    child: Container(
+                      padding: const EdgeInsets.all(30),
+                      child: Column(
+                        mainAxisSize:
+                            MainAxisSize.min, // Keeps the column compact.
+                        children: [
+                          const Text(
+                            'Are you sure you want to sign out?',
+                            style: kBodyText,
+                            textAlign: TextAlign.center, // Centers the text.
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          IconButton(
+                            onPressed: signUserOut,
+                            icon: const Icon(Icons.logout),
+                            color: Colors.white,
+                            iconSize: 75,
+                          ),
+                          const SizedBox(
+                              height:
+                                  20), // Adds spacing between the icon button and the text.
+                          // You can add more widgets here as needed.
+                        ],
+                      ),
                     ),
                   ),
                 ],

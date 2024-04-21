@@ -41,7 +41,7 @@ class _RegisterPageState extends State<RegisterPage> {
         });
   }
 
-  //Sign in method
+  //Sign up method
   void signUserUp() async {
     if (isChecked) {
       showDialog(
@@ -114,7 +114,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Column(
                     children: [
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           const Center(
                             child: Text(
