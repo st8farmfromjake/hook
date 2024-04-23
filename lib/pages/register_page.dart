@@ -48,7 +48,9 @@ class _RegisterPageState extends State<RegisterPage> {
           context: context,
           builder: (context) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              ),
             );
           });
 
@@ -60,9 +62,10 @@ class _RegisterPageState extends State<RegisterPage> {
         await FirebaseAuth.instance.currentUser!
             .updateDisplayName(usernameController.text);
         try {
-          final result = await ApiService().createNewLink();
+          final result = await ApiService().createNewLink(FirebaseAuth.instance.currentUser!.uid); // Pass UID as unique identifier
           print('Path: ${result['path']}');
           print('Id: ${result['linkId']}');
+          print('User Id ${FirebaseAuth.instance.currentUser!.uid}');
           //set firestore data for user
           //JAKE ADDED
           FirebaseFirestore.instance

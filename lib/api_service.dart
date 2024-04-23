@@ -38,8 +38,37 @@ class ApiService {
     return _cachedLinksClicked;
   }
 
-  Future<Map<String, dynamic>> createNewLink({String? originalURL='novusomni.com/hook'}) async {
+  // Future<Map<String, dynamic>> createNewLink({String? originalURL='novusomni.com/hook'}) async {
+  //   const String baseUrl = 'https://api.short.io/links';
+  //   final response = await http.post(
+  //     Uri.parse(baseUrl),
+  //     headers: {
+  //       'Authorization': _apiKey,
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: json.encode({
+  //       'domain': _domain,
+  //       'originalURL': originalURL,
+  //     }),
+  //   );
+
+  //   if (response.statusCode == 200) {
+  //     final data = json.decode(response.body);
+
+  //     // Assuming 'path' and 'idString' are the keys in the response
+  //     final String path = data['path'];
+  //     final String linkId = data['idString'];
+  //     // You could directly return these values, or save them as needed
+  //     return {'path': path, 'linkId': linkId};
+  //   } else {
+  //     // Handle the case where the server responds with an error
+  //     throw Exception('Failed to create link');
+  //   }
+  // }
+  Future<Map<String, dynamic>> createNewLink(String userId) async {
     const String baseUrl = 'https://api.short.io/links';
+    String originalURL = 'novusomni.com/hook'; // Base URL
+
     final response = await http.post(
       Uri.parse(baseUrl),
       headers: {
@@ -49,20 +78,18 @@ class ApiService {
       body: json.encode({
         'domain': _domain,
         'originalURL': originalURL,
+        'path' : userId
       }),
     );
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-
-      // Assuming 'path' and 'idString' are the keys in the response
       final String path = data['path'];
       final String linkId = data['idString'];
-      // You could directly return these values, or save them as needed
       return {'path': path, 'linkId': linkId};
     } else {
-      // Handle the case where the server responds with an error
       throw Exception('Failed to create link');
     }
   }
+
 }
