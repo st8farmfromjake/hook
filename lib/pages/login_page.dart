@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   showDialog(
     context: context,
     barrierDismissible: false, // Prevents the dialog from being dismissed accidentally
-    builder: (context) => const Center(child: CircularProgressIndicator()),
+    builder: (context) => const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white),)),
   );
 
   try {

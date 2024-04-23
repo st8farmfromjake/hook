@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hook/components/my_textfield.dart';
 import 'package:hook/palette.dart';
 import '../widgets/widgets.dart';
+import 'package:hook/api_service.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
@@ -39,14 +41,16 @@ class _RegisterPageState extends State<RegisterPage> {
         });
   }
 
-  //Sign in method
+  //Sign up method
   void signUserUp() async {
     if (isChecked) {
       showDialog(
           context: context,
           builder: (context) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              ),
             );
           });
 
@@ -55,11 +59,34 @@ class _RegisterPageState extends State<RegisterPage> {
           email: emailController.text,
           password: passwordController.text,
         );
-        await FirebaseAuth.instance.currentUser!.updateDisplayName(usernameController.text);
-        Navigator.pop(context);
+        await FirebaseAuth.instance.currentUser!
+            .updateDisplayName(usernameController.text);
+        try {
+          final result = await ApiService().createNewLink(FirebaseAuth.instance.currentUser!.uid); // Pass UID as unique identifier
+          print('Path: ${result['path']}');
+          print('Id: ${result['linkId']}');
+          print('User Id ${FirebaseAuth.instance.currentUser!.uid}');
+          //set firestore data for user
+          //JAKE ADDED
+          FirebaseFirestore.instance
+              .collection("user_email_info")
+              .doc(FirebaseAuth.instance.currentUser!.email)
+              .set(
+            {"linkID": result['linkId'], "path": result['path'], "totalEmailsSent": 0},
+          );
+          //END OF JAKE ADDED
+        } catch (e) {
+          print('Error creating link: $e');
+        }
+        if(mounted){
+          Navigator.pop(context);
+        }
       } on FirebaseAuthException catch (e) {
+        if(mounted){
+          Navigator.pop(context);
+        }
         print(e.code);
-        Navigator.pop(context);
+        
       }
     } else {
       showErrorMessage(
@@ -70,11 +97,10 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-
       children: [
         const BackgroundImage(),
         Scaffold(
-          resizeToAvoidBottomInset: false,
+            resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
             body: SafeArea(
                 child: Column(
@@ -96,7 +122,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Column(
                     children: [
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           const Center(
                             child: Text(
