@@ -36,7 +36,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
 
   void refreshLinksClicked() async {
     await ApiService().getTotalClicks();
-    // Update the UI with the cached value after refreshing
+    // stuff goes here
     setState(() {
       linksClicked = ApiService.getCachedLinksClicked();
     });
