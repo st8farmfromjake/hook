@@ -12,13 +12,14 @@ class ProfilePage extends StatefulWidget {
 
 final FirebaseAuth auth = FirebaseAuth.instance;
 String curImage = 'assets/pfp.jpg';
+final User user = FirebaseAuth.instance.currentUser!;
+String displayName = user.displayName.toString();
+String email = user.email.toString();
+
 
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-  final User user = FirebaseAuth.instance.currentUser!;
-  String displayName = user.displayName.toString();
-  String email = user.email.toString();
 
   var displayNameController = TextEditingController();
   var passwordController = TextEditingController();
@@ -37,8 +38,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Container(
-                          width: 150,
-                          height: 150,
+                          width: 120,
+                          height: 120,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: const Border.symmetric(
@@ -97,12 +98,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                   actionsAlignment: MainAxisAlignment.center,
                                   actions: [
                                     OutlinedButton(
-                                      onPressed: () async {
-
+                                      onPressed: () {
                                         var newDisplayName = displayNameController.text;
                                         user.updateDisplayName(newDisplayName);
+                                        displayName = newDisplayName;
                                         
-
                                         setState(() {});
                                         Navigator.pop(context);
                                       },
