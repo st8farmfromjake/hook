@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hook/components/my_textfield.dart';
 import 'package:hook/palette.dart';
 import '../widgets/widgets.dart';
+import 'package:hook/api_service.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
@@ -18,25 +20,77 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final passwordController = TextEditingController();
 
-  //Sign in method
-  void signUserUp() async {
+  final usernameController = TextEditingController();
+
+  bool isChecked = false;
+
+  void showErrorMessage(String message) {
     showDialog(
         context: context,
         builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return AlertDialog(
+            backgroundColor: Colors.redAccent,
+            title: Center(
+              child: Text(
+                textAlign: TextAlign.center,
+                message,
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
           );
         });
+  }
 
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-      Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
-      print(e.code);
-      Navigator.pop(context);
+  //Sign up method
+  void signUserUp() async {
+    if (isChecked) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              ),
+            );
+          });
+
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+        await FirebaseAuth.instance.currentUser!
+            .updateDisplayName(usernameController.text);
+        try {
+          final result = await ApiService().createNewLink(FirebaseAuth.instance.currentUser!.uid); // Pass UID as unique identifier
+          print('Path: ${result['path']}');
+          print('Id: ${result['linkId']}');
+          print('User Id ${FirebaseAuth.instance.currentUser!.uid}');
+          //set firestore data for user
+          //JAKE ADDED
+          FirebaseFirestore.instance
+              .collection("user_email_info")
+              .doc(FirebaseAuth.instance.currentUser!.email)
+              .set(
+            {"linkID": result['linkId'], "path": result['path'], "totalEmailsSent": 0},
+          );
+          //END OF JAKE ADDED
+        } catch (e) {
+          print('Error creating link: $e');
+        }
+        if(mounted){
+          Navigator.pop(context);
+        }
+      } on FirebaseAuthException catch (e) {
+        if(mounted){
+          Navigator.pop(context);
+        }
+        print(e.code);
+        
+      }
+    } else {
+      showErrorMessage(
+          "You must accept Hook's terms and conditions before creating an account");
     }
   }
 
@@ -46,12 +100,13 @@ class _RegisterPageState extends State<RegisterPage> {
       children: [
         const BackgroundImage(),
         Scaffold(
+            resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
             body: SafeArea(
                 child: Column(
               children: [
                 Container(
-                  height: 150,
+                  height: 100,
                   child: const Center(
                     child: Text(
                       'Hook',
@@ -60,14 +115,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 100,
+                  height: 75,
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: Column(
                     children: [
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           const Center(
                             child: Text(
@@ -80,6 +134,14 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
 
                           const SizedBox(height: 25),
+                          MyTextField(
+                            controller: usernameController,
+                            hintText: 'Your Name',
+                            obscureText: false,
+                          ),
+
+                          const SizedBox(height: 10),
+
                           //username textfeild
                           MyTextField(
                             controller: emailController,
@@ -102,8 +164,30 @@ class _RegisterPageState extends State<RegisterPage> {
                         ],
                       ),
                       Column(
+                        children: <Widget>[
+                          Text(
+                            "Accept Hook terms and conditions",
+                            style: TextStyle(color: Colors.grey[200]),
+                          ),
+                          Checkbox(
+                            value: isChecked,
+                            checkColor: Colors.white,
+                            activeColor: Colors.orange,
+                            side: const BorderSide(
+                              color: Colors.white,
+                              width: 1.5,
+                            ),
+                            onChanged: (newBool) {
+                              setState(() {
+                                isChecked = newBool!;
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                      Column(
                         children: [
-                          const SizedBox(height: 100),
+                          const SizedBox(height: 20),
                           Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
@@ -114,7 +198,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 child: const Padding(
                                   padding: EdgeInsets.symmetric(vertical: 20.0),
                                   child: Text(
-                                    'Sign In',
+                                    'Create your Account',
                                     style: kBodyText,
                                   ),
                                 )),

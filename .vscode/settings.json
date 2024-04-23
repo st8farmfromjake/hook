@@ -1,0 +1,12 @@
+{
+<<<<<<< HEAD
+<<<<<<< HEAD
+    "java.configuration.updateBuildConfiguration": "interactive"
+=======
+    "cmake.sourceDirectory": "/Users/michaelwoll/code/hook/linux"
+>>>>>>> 641d5b88a1464574fdbe6bf5c85387c85a0292dc
+=======
+    "cmake.sourceDirectory": "/Users/michaelwoll/code/hook/linux",
+    "java.compile.nullAnalysis.mode": "disabled"
+>>>>>>> a2a08eeacc1c325cc6ee94a71ec54db6b13919b9
+}
