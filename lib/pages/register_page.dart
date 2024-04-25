@@ -128,7 +128,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               "Register your Account!",
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 32,
+                                fontSize: 27,
                               ),
                             ),
                           ),

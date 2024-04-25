@@ -34,9 +34,9 @@ class _LoginPageState extends State<LoginPage> {
       password: passwordController.text,
     );
     // Check if the widget is still mounted before popping the dialog
-    if (mounted) {
-      Navigator.pop(context); // Dismiss the loading dialog
-    }
+    // if (mounted) {
+    //   Navigator.pop(context); // Dismiss the loading dialog
+    // }
   } on FirebaseAuthException catch (e) {
     // Check if the widget is still mounted before popping the dialog and showing the error message
     if (mounted) {
