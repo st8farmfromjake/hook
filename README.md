@@ -1,4 +1,4 @@
-# hook
+# Hook
 
 A new Flutter project.
 
