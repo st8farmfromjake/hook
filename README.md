@@ -1,6 +1,11 @@
 # Hook
 
-A new Flutter project.
+Hook is a cyber-security focused mobile app that allows department heads to test their company's phishing awareness.
+
+# Contributors:
+
+wollm / Th3D1r3ct0r, bri-dget, and Cookiee20
+
 
 ## Getting Started
 
